@@ -6,7 +6,7 @@ Find and jump to TODO comments scattered across your project, all in one sidebar
 
 This extension isn't published to the VS Code Marketplace yet, so install manually instead:
 
-1. Download the latest `.vsix` file from the [Releases page](https://github.com/YOUR_USERNAME/waypoint/releases)
+1. Download the latest `.vsix` file from the [Releases page](https://github.com/tristancable/waypoint/releases)
 2. In VS Code, open the Extensions view
 3. Click the `...` menu (top-right of the Extensions panel), then **Install from VSIX...**
 4. Select the downloaded file

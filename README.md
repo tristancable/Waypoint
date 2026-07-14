@@ -1,15 +1,24 @@
 # Waypoint
 
-Find and jump to TODO comments scattered across your project — all in one sidebar panel.
+Find and jump to TODO comments scattered across your project, all in one sidebar panel.
+
+## Installation
+
+This extension isn't published to the VS Code Marketplace yet, so install manually instead:
+
+1. Download the latest `.vsix` file from the [Releases page](https://github.com/YOUR_USERNAME/waypoint/releases)
+2. In VS Code, open the Extensions view
+3. Click the `...` menu (top-right of the Extensions panel), then **Install from VSIX...**
+4. Select the downloaded file
 
 ## Features
 
-- **Sidebar panel** — lists every `TODO`, `FIXME`, `HACK`, and `NOTE` comment in your workspace, grouped by file
-- **Click to jump** — click any item to open that exact line
-- **Live updates** — the list refreshes automatically every time you save a file
-- **Mark as done** — right-click any item to check it off without deleting the comment
-- **Custom tags & colors** — configure your own comment tags and assign each one a color
-- **Status bar count** — see your total open todo count at a glance
+- **Sidebar panel**: lists every `TODO`, `FIXME`, `HACK`, and `NOTE` comment in your workspace, grouped by file
+- **Click to jump**: click any item to open that exact line
+- **Live updates**: the list refreshes automatically every time you save a file
+- **Mark as done**: right-click any item to check it off without deleting the comment
+- **Custom tags & colors**: configure your own comment tags and assign each one a color
+- **Status bar count**: see your total open todo count at a glance
 
 ## Usage
 
@@ -21,7 +30,7 @@ Find and jump to TODO comments scattered across your project — all in one side
 
 ## Configuration
 
-Waypoint adds one setting, `waypoint.tags` — an object where each key is a tag name and each value is its hex color:
+Waypoint adds one setting, `waypoint.tags`, an object where each key is a tag name and each value is its hex color:
 
 \`\`\`json
 "waypoint.tags": {
@@ -34,6 +43,11 @@ Waypoint adds one setting, `waypoint.tags` — an object where each key is a tag
 \`\`\`
 
 Leave the color blank to get an automatically assigned color instead.
+
+## Known limitations
+
+- Scans a fixed set of common file types (JS/TS, Python, Java, C/C++, Go, Ruby, PHP, CSS, HTML, Markdown)
+- No multi-root workspace support yet
 
 ## License
 

@@ -29,15 +29,13 @@ export function activate(context: vscode.ExtensionContext) {
     statusBarItem.show();
   };
 
-  // Single choke point: anything that calls todoProvider.refresh()
-  // (save, config change, toggleDone) will update the status bar too
   context.subscriptions.push(
     todoProvider.onDidChangeTreeData(() => {
       updateStatusBar();
     }),
   );
 
-  updateStatusBar(); // initial population
+  updateStatusBar();
 
   context.subscriptions.push(
     vscode.workspace.onDidSaveTextDocument(() => {

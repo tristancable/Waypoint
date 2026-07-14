@@ -1,6 +1,5 @@
 import * as vscode from "vscode";
 
-// A small fallback palette, used for any tag that isn't in the user's color settings
 const FALLBACK_PALETTE = [
   "#a074c4",
   "#4ec9b0",
@@ -34,10 +33,9 @@ interface RawTodo {
   filePath: string;
   fileName: string;
   line: number;
-  id: string; // stable identifier for "done" tracking
+  id: string;
 }
 
-// A collapsible row representing one file
 class FileNode extends vscode.TreeItem {
   constructor(
     public readonly fileName: string,
@@ -49,7 +47,6 @@ class FileNode extends vscode.TreeItem {
   }
 }
 
-// A single todo row, nested under a FileNode
 class TodoItem extends vscode.TreeItem {
   constructor(
     public readonly todo: RawTodo,
@@ -74,7 +71,6 @@ class TodoItem extends vscode.TreeItem {
       this.iconPath = makeDotIcon(color);
     }
 
-    // Right-click context menu will use this to know which command to show
     this.contextValue = done ? "todoDone" : "todoOpen";
   }
 }
@@ -99,7 +95,6 @@ export class TodoProvider implements vscode.TreeDataProvider<TreeNode> {
     return element;
   }
 
-  // Total count, used by the status bar
   getTotalCount(): number {
     return this.allTodos.filter((t) => !this.isDone(t.id)).length;
   }
@@ -125,7 +120,6 @@ export class TodoProvider implements vscode.TreeDataProvider<TreeNode> {
   }
 
   async getChildren(element?: TreeNode): Promise<TreeNode[]> {
-    // Top level: return one FileNode per file that has todos
     if (!element) {
       await this.scan();
       const byFile = new Map<string, RawTodo[]>();
@@ -139,7 +133,6 @@ export class TodoProvider implements vscode.TreeDataProvider<TreeNode> {
       );
     }
 
-    // Second level: return TodoItems for a given file
     if (element instanceof FileNode) {
       const config = vscode.workspace.getConfiguration("waypoint");
       const tagMap = config.get<Record<string, string>>("tags", {
@@ -202,7 +195,7 @@ export class TodoProvider implements vscode.TreeDataProvider<TreeNode> {
             filePath: file.fsPath,
             fileName,
             line: index,
-            id: `${file.fsPath}:${message}`, // stable-ish across small line shifts
+            id: `${file.fsPath}:${message}`,
           });
         }
       });

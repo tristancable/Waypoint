@@ -1,0 +1,112 @@
+{
+  "name": "waypoint",
+  "displayName": "Waypoint",
+  "description": "Find and jump to TODO comments across your project",
+  "version": "0.0.1",
+  "icon": "media/marketplace-icon.png",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "waypoint.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "waypoint.toggleDone",
+        "title": "Toggle done"
+      },
+      {
+        "command": "waypoint.openSettings",
+        "title": "Open Waypoint settings",
+        "icon": "$(gear)"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "waypoint.toggleDone",
+          "when": "view == waypointTodoView"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "waypoint.openSettings",
+          "when": "view == waypointTodoView",
+          "group": "navigation"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "waypoint-sidebar",
+          "title": "Waypoint",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "waypoint-sidebar": [
+        {
+          "id": "waypointTodoView",
+          "name": "Todos"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Waypoint",
+      "properties": {
+        "waypoint.tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {
+            "TODO": "#e2c08d",
+            "FIXME": "#f14c4c",
+            "HACK": "#cc6633",
+            "NOTE": "#3794ff"
+          },
+          "description": "Tags Waypoint scans for, each with a hex color. Add your own tag as a new item — leave the color blank to get an automatic color instead."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.125.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "esbuild": "^0.28.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
